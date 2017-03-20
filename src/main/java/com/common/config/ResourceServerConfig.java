@@ -24,7 +24,7 @@ import java.io.IOException;
 
 @Configuration
 @EnableResourceServer
-//@Order(99)
+@Order(99)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	public static final String RESOURCE_ID = "myapp/api";

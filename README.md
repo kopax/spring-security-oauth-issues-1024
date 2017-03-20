@@ -27,7 +27,7 @@ Reproduction
 
 1. Clone the project
 
-    git clone GIT_URL
+    git clone https://github.com/kopax/spring-security-oauth-issues-1024 && cd spring-security-oauth-issues-1024
 
 2. start the server
 
