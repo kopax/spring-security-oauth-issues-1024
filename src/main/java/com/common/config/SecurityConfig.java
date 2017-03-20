@@ -35,6 +35,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 
@@ -76,6 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			.requestMatcher(new OrRequestMatcher(new AntPathRequestMatcher(HttpPathStore.LOGIN), new AntPathRequestMatcher(HttpPathStore.LOGOUT), new AntPathRequestMatcher(HttpPathStore.PING), new AntPathRequestMatcher("/oauth/authorize")))
 			.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.NEVER)
 				.and()
