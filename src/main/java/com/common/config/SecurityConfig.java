@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.requestMatcher(new OrRequestMatcher(new AntPathRequestMatcher(HttpPathStore.LOGIN), new AntPathRequestMatcher(HttpPathStore.LOGOUT), new AntPathRequestMatcher(HttpPathStore.PING)))
+			.requestMatcher(new OrRequestMatcher(new AntPathRequestMatcher(HttpPathStore.LOGIN), new AntPathRequestMatcher(HttpPathStore.LOGOUT), new AntPathRequestMatcher(HttpPathStore.PING), new AntPathRequestMatcher("/oauth/authorize")))
 			.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.NEVER)
 				.and()
