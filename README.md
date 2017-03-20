@@ -27,24 +27,24 @@ Reproduction
 
 1. Clone the project
 
-    git clone https://github.com/kopax/spring-security-oauth-issues-1024 && cd spring-security-oauth-issues-1024
+        git clone https://github.com/kopax/spring-security-oauth-issues-1024 && cd spring-security-oauth-issues-1024
 
 2. start the server
 
-    ./gradlew build --info && java -jar build/libs/api-oauth2.jar --spring.profiles.active=default
+        ./gradlew build --info && java -jar build/libs/api-oauth2.jar --spring.profiles.active=default
 
     
 3. get a cookie
 
-    export COOKIE=$(curl -v --silent http://localhost:8081/ 2>&1 | grep cookie -i | awk -F ' ' '{print $3}')
+        export COOKIE=$(curl -v --silent http://localhost:8081/ 2>&1 | grep cookie -i | awk -F ' ' '{print $3}')
         
 4. authenticate the cookie
 
-    export COOKIE=$(curl --cookie "$COOKIE" -d username=admin -d password=verysecret -v --silent http://localhost:8081/login 2>&1 | grep cookie -i | awk -F ' ' '{print $3}')
+        export COOKIE=$(curl --cookie "$COOKIE" -d username=admin -d password=verysecret -v --silent http://localhost:8081/login 2>&1 | grep cookie -i | awk -F ' ' '{print $3}')
  
 5. try to get a secured oauth resource at `/`
 
-    curl --cookie "$COOKIE" -v http://localhost:8081/
+        curl --cookie "$COOKIE" -v http://localhost:8081/
     
  
 Expected
