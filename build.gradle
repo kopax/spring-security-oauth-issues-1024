@@ -1,0 +1,93 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://repo.spring.io/plugins-release" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
+    }
+
+}
+
+apply plugin: "java"
+//apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "org.springframework.boot"
+apply plugin: "propdeps"
+apply plugin: "propdeps-maven"
+apply plugin: "propdeps-idea"
+apply plugin: "propdeps-eclipse"
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/plugins-release" }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+
+    // Import local jars
+//    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile("org.hsqldb:hsqldb:2.3.4")
+
+    // ---------------------
+    // ---UTILITIES---------
+    // ---------------------
+    // Serialization with google gson
+    compile("com.google.code.gson:gson:2.8.0")
+    // Apache utils
+    compile("org.apache.commons:commons-lang3:3.5")
+    compile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
+
+    // ---------------------
+    // ---DATABASE----------
+    // ---------------------
+
+    compile("com.h2database:h2:1.4.194")
+    // ORM
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("com.ifrabbit:spring-boot-starter-data-mybatis:1.0.14.RELEASE")
+    compile("org.mybatis:mybatis-typehandlers-jsr310:1.0.1")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr1")
+
+    // Flyway database migration
+    compile("org.flywaydb:flyway-core")
+    // Session storage
+    compile("org.springframework.session:spring-session-jdbc:1.3.0.RELEASE")
+
+    // --------------
+    // ---SECURITY---
+    // --------------
+    // Starter for using Spring Security
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.security:spring-security-config")
+    compile("org.springframework.security.oauth:spring-security-oauth2:2.1.0.RELEASE")
+    testCompile("org.springframework.security:spring-security-test")
+    compile("org.springframework.security:spring-security-jwt:1.0.7.RELEASE")
+
+    // Starter for using Spring Framework"s caching support
+    // TODO: not tested yet
+    compile("org.springframework.boot:spring-boot-starter-cache")
+
+    // Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+
+    // includes a Java annotation processor which is invoked as your project is compiled
+    optional("org.springframework.boot:spring-boot-configuration-processor")
+
+    // include dev-tools
+    optional("org.springframework.boot:spring-boot-devtools")
+}
+
+// ensure that resources are processed before code is compiled.
+// Without this directive any additional-spring-configuration-metadata.json files will not be processed.
+compileJava.dependsOn(processResources)
+
+// Wrapper configuration
+task wrapper(type: Wrapper) {
+    gradleVersion = "3.3"
+}

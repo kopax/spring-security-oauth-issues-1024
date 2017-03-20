@@ -1,0 +1,34 @@
+server:
+  port: 8081
+  session:
+    timeout: -1
+    cookie:
+      domain: localhost
+      path: /
+      http-only: true
+      secure: false
+      name: JSESSIONID
+
+spring:
+  application:
+    name: api
+  devtools:
+    remote:
+      restart:
+        enabled: true
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+logging:
+  pattern:
+    console: "%msg%n"
+  level:
+    com: DEBUG
+
+ribbon:
+  ServerListRefreshInterval: 1000
