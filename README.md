@@ -57,11 +57,6 @@ Result
 
 http status code `200`
 
-_Note: if you remove `@Order(99)`_
-
-
-
-
 Useful information:
 ===================
 
