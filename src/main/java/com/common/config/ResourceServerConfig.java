@@ -24,7 +24,6 @@ import java.io.IOException;
 
 @Configuration
 @EnableResourceServer
-@Order(99)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	public static final String RESOURCE_ID = "myapp/api";
@@ -37,12 +36,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.antMatcher("/**") // ### Specify path pattern that need OAuth authentication(Bearer auth) and authorization
-				.requestMatchers().antMatchers(
-						"/**"
-					).and()
+		http
 				.authorizeRequests()
-					.antMatchers(HttpMethod.GET, HttpPathStore.PING).permitAll()
 				.anyRequest()
 					.access("#oauth2.hasScope('write') " +
 							"and #oauth2.clientHasRole('ROLE_CLIENT') " +
